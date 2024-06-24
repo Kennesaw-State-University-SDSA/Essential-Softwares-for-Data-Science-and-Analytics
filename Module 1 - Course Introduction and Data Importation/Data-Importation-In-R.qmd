@@ -1,0 +1,102 @@
+---
+title: "Data Importation"
+subtitle: "Using R and RStudio"
+author: "Dr. Austin Brown"
+institute: "Kennesaw State University"
+format: beamer
+editor: visual
+execute: 
+  include: true
+  echo: true
+---
+
+```{r,echo=F}
+setwd("D:/KSU/Teaching/Essential-Softwares-for-Data-Science-and-Analytics/Module 1 - Course Introduction and Data Importation")
+```
+
+## Data Importation
+
+-   **Objective**: Learn how to import data from CSV and XLSX files into RStudio
+-   **Importance**: Importing data is a fundamental step in data analysis and data science workflows.
+
+## Importing CSV Files in RStudio
+
+- In the Module 1 folder in D2L, there is a CSV file called "Cars.csv".
+
+- Download the file to your computer and then upload to your Posit Cloud project folder. If you need help understanding how to upload the file, please refer to the video tutorial at this [link](https://www.youtube.com/watch?v=FSiDrlOAjgo).
+
+- After uploading the file, we can use the `read.csv` function to help us import the data into RStudio.
+
+## Importing CSV Files in RStudio
+
+- We can think of functions as tools that help us perform specific tasks. The `read.csv` function is a tool that helps us import data from a CSV file.
+
+- Each function has specific arguments that we must specify in order to the function to execute the way we expect it to.
+
+- For the `read.csv` function, we must specify the file path to the CSV file we want to import.
+
+## Importing CSV Files in RStudio
+
+```{r}
+## Importing Data from CSV ##
+cars <- read.csv("Cars.csv")
+```
+
+- Now in the upper right hand corner of our RStudio window, we should see a data object called `cars` which contains 32 observations (or rows) and 12 variables (or columns).
+
+## Importing XLSX Files in RStudio
+
+- We can also import Excel files into RStudio. For this example, please download the Penguins.xlsx file from D2L and upload to your Posit Cloud project folder.
+
+- This time, we will make use of a function called `read_xlsx`. However, this function is not part of base R, but instead is part of an external package called `readxl`.
+
+- To use the `readxl` package, we must first install it using the `install.packages` function.
+
+```{r,eval=F}
+## Installing readxl ##
+install.packages('readxl')
+```
+
+## Importing XLSX Files in RStudio
+
+- Once installed, we can load the `readxl` package using the `library` function.
+    - Loading a package is similar to opening a toolbox. It gives us access to all the tools (or functions) that are part of the package.
+
+```{r}
+library(readxl)
+```
+
+## Importing XLSX Files in RStudio
+
+- Once the package is loaded, we can use the `read_xlsx` function in a similar manner to how we used the `read.csv` function.
+
+```{r}
+## Importing Data from XLSX ##
+penguins <- read_xlsx("Penguins.xlsx")
+```
+
+## Exploring Imported Data
+
+- Once we have imported data, it is important to explore it to ensure that it was imported correctly.
+
+- There are many ways to go about this using R, but one of the simplest ways is to use the `head` function.
+    The `head` function displays the first few rows of a data frame.
+    
+- Let's use the `head` function on both the `cars` and `penguins` dataframes:
+
+## Exploring Imported Data
+
+\tiny
+```{r}
+## Use your head function: ##
+head(cars)
+```
+\normalsize
+
+## Exploring Imported Data
+
+\tiny
+```{r}
+head(penguins)
+```
+\normalsize

@@ -1,0 +1,84 @@
+---
+title: "Data Importation"
+subtitle: "Using SAS and SAS Studio"
+author: "Dr. Austin Brown"
+institute: "Kennesaw State University"
+format: beamer
+editor: visual
+---
+
+```{r,echo=F}
+setwd("D:/KSU/Teaching/Essential-Softwares-for-Data-Science-and-Analytics/Module 1 - Course Introduction and Data Importation")
+```
+
+## Data Importation
+
+-   **Objective**: Learn how to import data from CSV and XLSX files into SAS Studio.
+-   **Importance**: Importing data is a fundamental step in data analysis and data science workflows.
+
+## Importing Data in SAS Studio
+
+- There are multiple ways to import data into SAS Studio.
+
+- For us, since we are working with external files we've downloaded from D2L (e.g., the Cars.csv file), we will need to upload these files into SAS Studio much like we did with Google Colab and Posit Cloud.
+
+- To do this, we will use the following code:
+
+```
+PROC IMPORT DATAFILE="/path/to/your/Cars.csv"
+    OUT=cars
+    DBMS=CSV
+    REPLACE;
+    GETNAMES=yes;
+RUN;
+```
+
+## Importing Data in SAS Studio
+
+- Note, unlike R and Python, SAS is not case-sensitive. 
+
+- So `PROC IMPORT` and `proc import` are the same.
+
+- Now, let's try importing an Excel file!
+
+## Importing Data in SAS Studio
+
+```
+PROC IMPORT DATAFILE="/path/to/your/Penguins.xlsx"
+    OUT=cars
+    DBMS=XLSX
+    REPLACE;
+    GETNAMES=yes;
+RUN;
+```
+
+## Explore Imported Data
+
+- Once we have imported data, it is important to explore it to ensure that it was imported correctly.
+
+- There are a few ways to go about this using SAS, but one of the simplest ways is to use the `PRINT` procedure.
+    The `PROC PRINT` (along with the `OBS` option) displays the first few rows of a data frame.
+    
+- Let's use the print the first five rows of the Cars and Penguins dataframes:
+
+## Explore Imported Data
+
+```
+PROC PRINT DATA=cars(OBS=5);
+RUN;
+```
+
+```{r,echo=F,include=T,out.width="105%",out.height="150%"}
+knitr::include_graphics("10obscars.png")
+```
+
+## Explore Imported Data
+
+```
+PROC PRINT DATA=penguins(OBS=5);
+RUN;
+```
+
+```{r,echo=F,include=T,out.width="105%",out.height="150%"}
+knitr::include_graphics("10obspens.png")
+```
