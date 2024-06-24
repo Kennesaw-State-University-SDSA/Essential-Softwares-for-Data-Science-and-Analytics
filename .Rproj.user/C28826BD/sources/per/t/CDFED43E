@@ -1,0 +1,30 @@
+{
+    "id": "CDFED43E",
+    "path": "D:/KSU/Teaching/Essential-Softwares-for-Data-Science-and-Analytics/Module 1 - Course Introduction and Data Importation/Data Importation In Python.qmd",
+    "project_path": "Module 1 - Course Introduction and Data Importation/Data Importation In Python.qmd",
+    "type": "quarto_markdown",
+    "hash": "1390958871",
+    "contents": "",
+    "dirty": false,
+    "created": 1719249877066.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "source_window_id": "",
+        "Source": "Source",
+        "docOutlineVisible": "1",
+        "cursorPosition": "61,77",
+        "scrollLine": "47",
+        "rmdVisualCollapsedChunks": ""
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1719253922,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1719253920791,
+    "read_only": false,
+    "read_only_alternatives": []
+}

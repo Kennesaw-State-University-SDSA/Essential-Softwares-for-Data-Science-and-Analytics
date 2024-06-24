@@ -1,0 +1,133 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Data Importation\"\n",
+        "subtitle: \"Using Python and Google Colab\"\n",
+        "author: \"Dr. Austin Brown\"\n",
+        "institute: \"Kennesaw State University\"\n",
+        "format: beamer\n",
+        "editor: visual\n",
+        "execute: \n",
+        "  warning: false\n",
+        "  include: true\n",
+        "  echo: true\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## Data Importation\n",
+        "\n",
+        "-   **Objective**: Learn how to import necessary packages and data (eg. CSV and XLSX files) in Google Colab.\n",
+        "-   **Importance**: Importing data is a fundamental step in data analysis and data science workflows.\n",
+        "\n",
+        "## Importing CSV Files into Google Colab\n",
+        "\n",
+        "- There are several ways we can import data into Google Colab.\n",
+        "\n",
+        "- For us, since we are working with external files we've downloaded from D2L (e.g., the Cars.csv file), we will need to upload these files into Google Colab much like we did with Posit Cloud.\n",
+        "\n",
+        "- To do this, we will use the following code:\n"
+      ],
+      "id": "1ab9b995"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from google.colab import files\n",
+        "uploaded = files.upload()"
+      ],
+      "id": "83872296",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Importing CSV Files into Google Colab\n",
+        "\n",
+        "- This will give you a file upload dialog where you can navigate to the file you want to upload.\n",
+        "\n",
+        "- Once you've selected the file, you can then use the following code to import the data into a `pandas` DataFrame:\n"
+      ],
+      "id": "f2dbfd5d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "## Importing Necessary Packages\n",
+        "import pandas as pd\n",
+        "cars = pd.read_csv('Cars.csv')"
+      ],
+      "id": "ee85b899",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Importing XLSX Files into Google Colab\n",
+        "\n",
+        "- We can also import Excel files into Google Colab following a similar process.\n",
+        "\n",
+        "- Follow the same procedure as before for uploading a file into the Google Colab environment. Then, the following code can be executed:\n"
+      ],
+      "id": "b7e8b57b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "## Import the Penguins.xlsx file ##\n",
+        "penguins = pd.read_excel('Penguins.xlsx')"
+      ],
+      "id": "992581e8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Explore Imported Data\n",
+        "\n",
+        "- Once we have imported data, it is important to explore it to ensure that it was imported correctly.\n",
+        "\n",
+        "- There are many ways to go about this using Python, but one of the simplest ways is to use the `head` function.\n",
+        "    The `head` function displays the first few rows of a data frame.\n",
+        "    \n",
+        "- Let's use the `head` function on both the `cars` and `penguins` dataframes:\n",
+        "\n",
+        "## Explore Imported Data\n"
+      ],
+      "id": "86d020b7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "## Use your head function: ##\n",
+        "cars.head()\n",
+        "penguins.head()"
+      ],
+      "id": "5fab0f21",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
