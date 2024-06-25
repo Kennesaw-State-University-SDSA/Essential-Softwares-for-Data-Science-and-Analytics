@@ -1,0 +1,184 @@
+---
+title: "Understanding Data Structure and Column Contents"
+subtitle: "using R"
+author: "Dr. Austin Brown"
+institute: "Kennesaw State University"
+format: beamer
+editor: visual
+execute: 
+  include: true
+  echo: true
+---
+
+```{r,echo=F}
+setwd("D:/KSU/Teaching/Essential-Softwares-for-Data-Science-and-Analytics/Module 2 - Understanding Data Structure and Column Contents")
+```
+
+## Understanding Column Contents
+
+-   **Objective**: Learn to differentiate between numeric and character data, and identify missing data.
+-   **Importance**: Essential for correct data processing and analysis.
+-   **Key Points**
+    -   **str()**: Displays structure of the dataframe, including data types.
+    -   **summary()**: Provides a summary of each column, helping to identify missing values.
+    -   **Example**: Display metadata about a dataset and its missing values.
+
+## Data Structure
+
+- In any given dataset, the way the data are arranged is paramount for understanding what the data are and what information they contain.
+
+- Generally, we want the way data are recorded within a dataset to be "tidy".
+
+- Tidy data is data that is well-organized and easy to work with. It has a specific structure:
+
+    - Each variable is a column.
+    - Each observation is a row.
+    - Each cell has a single value.
+    
+## Data Structure
+
+- For instance, it the `cars` dataset below, the data are arranged in a tidy way:
+
+```{r,echo=F}
+data('mtcars')
+knitr::kable(head(mtcars[,1:5]))
+```
+
+## Data Structure
+
+- Why are they considered tidy? Consider our above criteria:
+
+    - Each variable is a column: `mpg`, `cyl`, `disp`, `hp`, `drat`.
+    - Each observation is a row: Each row represents a different car.
+    - Each cell has a single value: Each cell contains a single value for the variable it represents.
+    
+## Data Types: Numeric vs. Character Data
+
+- Now that we know how data should be structured, let's talk about the types of data we might encounter.
+
+- In R, there are two main types of variables:
+
+    - **Numeric or Quantitative**: These are variables which are naturally measured using numbers. Variables like age, height, weight, etc. are examples of numeric variables.
+    - **Character or Qualitative**: These are variables which are naturally measured using non-quantitative qualities. Variables like hair color, favorite food, etc. are examples of character variables.
+    
+## Data Types: Numeric vs. Character Data
+
+- Note, when we read data into R, based on the values contained in each column, R will automatically assign a data type to each column.
+
+- Thus, it is important for us to double-check to ensure that the data types as we understand them are also the way R has interpreted them.
+
+## Data Types: Numeric vs. Character Data
+
+- For example, suppose we want to use the Cars.csv dataset. We have already learned how to read that data in. But how do we check to see what data types R has assigned to each column?
+
+- To do this, we can use the `str()` function in R.
+
+- The `str()` function provides a compact display of the internal structure of an R object.
+    - For dataframes, it shows the data type of each column and the first few values in that column.
+    
+## Data Types: Numeric vs. Character Data
+
+\scriptsize
+```{r}
+## Read in the Data ##
+cars <- read.csv("Cars.csv")
+## Examine the Data Structure ##
+str(cars)
+```
+\normalsize
+
+## Data Types: Numeric vs. Character Data
+
+- As we can see in the output above, we get a list of all the columns in the dataset, along with the data type of each column.
+
+- Note, variables with `num` next to their name (e.g., mpg, disp, etc.) are numeric variables, while variables with `chr` next to their name (e.g., X) are character variables.
+
+- However, notice next to the `cyl` variable it says `int`. This is because R has interpreted the `cyl` variable as an integer, which is a type of numeric variable.
+
+- Character variables can also be referred to as `factor` variables in R.
+    - Factors generally contain ordered levels whereas character variables do not.
+    
+## Data Types: Numeric vs. Character Data
+
+- Now, let's read in the NYC Airplanes 2013 Excel dataset and perform the same operation.
+
+\scriptsize
+```{r}
+## Load readxl package ##
+library(readxl)
+## Read in Airplanes Data ##
+planes <- read_xlsx("NYC Airplanes 2013.xlsx")
+## Examine the Data Structure ##
+str(planes)
+```
+\normalsize
+
+## Data Types: Numeric vs. Character Data
+
+- As we can see from the output, we have five character columns and four numeric columns.
+
+- We also have 3322 observations (or rows) and 9 columns (or variables)
+    
+## Producing Column Summaries: Missing Data
+
+- In addition to understanding the data types of each column, it is also important to understand the contents of each column.
+
+- One very common issue that arises when working with data is missing data.
+
+- Missing data can be problematic for many reasons, including:
+    - It can lead to biased results.
+    - It can lead to incorrect conclusions.
+    - It can lead to incorrect inferences.
+    
+- Thus, it is important to identify and address missing data in our datasets before proceeding with any analysis.
+
+## Producing Column Summaries: Missing Data
+
+- How do we do this? One way is to use the `summary()` function in R.
+
+- The `summary()` function is like the `str()` function in some ways, but it also provides a summary of each column in the dataset, including the number of missing values in each column.
+
+- Let's see how this works with the `cars` dataset.
+
+## Producing Column Summaries: Missing Data
+
+\scriptsize
+```{r}
+## Examine the Data Summary ##
+summary(cars)
+```
+\normalsize
+
+## Producing Column Summaries: Missing Data
+
+- As we can see from the output above, the `summary()` function provides a summary of each column in the dataset.
+
+- For numeric variables, it provides the minimum, 1st quartile, median, mean, 3rd quartile, and maximum values.
+
+- For character variables, it provides the number of unique values in the column.
+
+- It also provides the number of missing values in each column.
+
+## Producing Column Summaries: Missing Data
+
+- In the case of the cars data, we see that there are no missing values in any of the columns.
+
+- However, this is not always the case. Let's see what happens when we use the `summary()` function on the `planes` dataset.
+
+
+## Producing Column Summaries: Missing Data
+
+\tiny
+```{r}
+## Examine the Data Summary ##
+summary(planes)
+```
+\normalsize
+
+## Producing Column Summaries: Missing Data
+
+- Here we can see that two of our variables, `year` and `speed` contain missing values.
+
+- The `year` variable has 70 missing values, while the `speed` variable has 3299 missing values.
+
+- This is important information to know, as it will help us to decide how to proceed with our analysis.
