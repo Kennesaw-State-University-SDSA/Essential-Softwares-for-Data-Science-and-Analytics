@@ -1,0 +1,154 @@
+---
+title: "Basic Data Analysis"
+subtitle: "Using R"
+author: "Dr. Austin Brown"
+institute: "Kennesaw State University"
+format: beamer
+editor: visual
+execute: 
+  include: true
+  echo: true
+---
+
+```{r,echo=F}
+setwd("D:/KSU/Teaching/Essential-Softwares-for-Data-Science-and-Analytics/Module 4 - Basic Data Analysis")
+```
+
+## Introduction to Data Analysis
+
+-   **Objective**: Learn to generate basic descriptive statistics and visualizations.
+-   **Importance**: Essential for understanding and summarizing data.
+
+## Introduction to Data Analysis
+
+- So far, we have learned how to import, inspect, and perform some basic transformations on data. 
+
+- After this is complete, we can now focus on analyzing the data to gain insights and answer questions.
+
+- At a foundational stage, this involves generating descriptive statistics and creating visualizations to summarize and present the data.
+
+## Introduction to Data Analysis
+
+- Remember in a previous module on understanding column contents, we learned that we generally have two different types of data:
+
+    - Numeric data: Data that represents quantities or numbers.
+    - Categorical data: Data that represents categories or groups.
+    
+- This difference is not arbitrary: it has implications for the types of analyses we can perform and methods we have available to us.
+
+## Introduction to Data Analysis
+
+- Let's once again use the HEART.csv file to demonstrate some basic data analysis techniques.
+
+- As before, go ahead and upload the file to your RStudio Cloud project folder and import the data using the `read.csv` function.
+
+- Now, let's explore some basic analysis of numeric data.
+
+## Analyzing Numeric Data
+
+- One of the first steps in analyzing numeric data is to calculate summary statistics.
+
+- In the heart dataset, suppose we want to calculate the sample mean, median, and standard deviation of the `Height` and `Weight` columns.
+
+- While there are several ways to do this, one of the simplest is to use the `get_summary_stats()` function from the `rstatix` package.
+
+- The `get_summary_stats()` function provides a concise summary of the data, including the mean, median, standard deviation, and other key statistics.
+
+## Analyzing Numeric Data
+
+\scriptsize
+```{r,eval=F}
+## Read in HEART.csv file ##
+heart <- read.csv("HEART.csv")
+## Install rstatix package ##
+install.packages("rstatix")
+## Load rstatix package ##
+library(rstatix)
+## Calculate summary statistics for Age and Weight ##
+get_summary_stats(heart, c("Height", "Weight"))
+```
+
+```{r,echo=F}
+## Read in HEART.csv file ##
+heart <- read.csv("HEART.csv")
+## Load rstatix package ##
+library(rstatix)
+## Calculate summary statistics for Age and Weight ##
+get_summary_stats(heart, c("Height", "Weight"))
+```
+\normalsize
+
+## Analyzing Numeric Data
+
+- Perhaps the most common method for visualizing a numeric variable is to create a histogram.
+
+- A histogram is a graphical representation of the distribution of a numeric variable.
+
+- The widths of the bars represent the intervals into which the data is grouped, while the heights of the bars represent the frequency of observations in each interval.
+
+- It is a quick, visual tool for understanding common and uncommon values in a dataset.
+
+- In R, we can create a histogram using the `hist()` function.
+
+## Analyzing Numeric Data
+
+```{r,fig.height=5,fig.width=7}
+## Create a histogram of the Height variable ##
+hist(heart$Height,main="Histogram of Height",
+     xlab="Height",col="blue",border="black")
+```
+
+## Analyzing Numeric Data
+
+- Notice, we select the `Height` column from the `heart` dataset using the `$` operator.
+
+- We then pass this column to the `hist()` function, along with some additional arguments to customize the appearance of the histogram.
+
+## Analyzing Categroical Data
+
+- For categorical data, one of the most common ways to summarize the data is to create a frequency table.
+
+- A frequency table is a tabular representation of the number of times each category appears in the data.
+
+- In R, we can create a frequency table using the `table()` function.
+
+- Suppose we want to create a frequency table for the `Weight_Status` column in the `heart` dataset.
+
+## Analyzing Categroical Data
+
+```{r}
+## Create a frequency table for the Weight_Status variable ##
+table(heart$Weight_Status)
+```
+
+## Analyzing Categroical Data
+
+- The `table()` function takes a single argument, which is the column of data for which we want to create a frequency table.
+
+- In this case, we pass the `Weight` column from the `heart` dataset to the `table()` function.
+
+- The output tells us how many times each category (e.g., `Normal`, `Overweight`, `Underweight`) appears in the data.
+    - Note, the blank category is due to missing values in the dataset.
+    - This means that `Weight_Status` contains 6 missing values.
+
+## Analyzing Categorical Data
+
+- A common way to visualize categorical data is to create a bar plot.
+
+- A bar plot is a graphical representation of the frequency of each category in a dataset, similar to a histogram for numeric data.
+
+- In R, we can create a bar plot using the `barplot()` function.
+
+- Suppose we want to create a bar plot for the `Weight_Status` column in the `heart` dataset.
+
+## Analyzing Categorical Data
+
+\tiny
+```{r,fig.height=4,fig.width=6,out.height="80%",out.width="80%"}
+## Create a bar plot of the Weight_Status 
+## variable ##
+barplot(table(heart$Weight_Status),
+        main="Bar Plot of Weight Status",
+        xlab="Weight Status",ylab="Frequency",col="blue")
+```
+\normalsize
