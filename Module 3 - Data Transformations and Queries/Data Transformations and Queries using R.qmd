@@ -1,0 +1,159 @@
+---
+title: "Data Transformations and Queries"
+subtitle: "Using R"
+author: "Dr. Austin Brown"
+institute: "Kennesaw State University"
+format: beamer
+editor: visual
+execute: 
+  include: true
+  echo: true
+---
+
+```{r,echo=F}
+setwd("D:/KSU/Teaching/Essential-Softwares-for-Data-Science-and-Analytics/Module 3 - Data Transformations and Queries")
+```
+
+## Simple Data Transformations/Queries
+
+-   **Objective**: Learn to perform basic data transformations such as selecting columns, filtering rows, and creating new columns.
+-   **Importance**: Essential for cleaning and preparing data for analysis.
+-   **Key Points**
+    -   **select() Function**: From the dplyr package, used to select specific columns.
+    -   **Syntax**: `select(data, column_names)`
+    -   **Example**: Code snippet showing how to select specific columns.
+
+## Simple Data Transformations/Queries
+
+- In many instances, you may need to perform simple data transformations or queries to extract specific information from your dataset.
+
+- This could involve selecting specific columns, filtering rows based on certain conditions, or creating new columns based on existing data.
+
+- In R, the `dplyr` package provides a set of functions that make these operations easy and intuitive.
+
+## Selecting Columns in R with `dplyr`
+
+- In D2L, download the HEART.csv file and upload to your RStudio Cloud project folder.
+
+- Go ahead and import the data using `read.csv` as we have done already.
+
+- Now, suppose instead of working with the full dataframe, I want to only focus on a few specific columns:
+    - `Chol_Status`
+    - `BP_Status`
+    - `Weight_Status`
+    - `Smoking_Status`
+
+## Selecting Columns in R with `dplyr`
+
+- While there are multiple ways of creating a new dataframe which contains only these four columns, one of the most straightforward ways is to use the `select()` function from the `dplyr` package.
+
+- The `select()` function allows you to choose specific columns from a dataframe and create a new dataframe with only those columns.
+
+- This can be useful when you have a large dataset with many columns, but you are only interested in a subset of them.
+
+- Let's see how this works with the HEART dataset.
+
+## Selecting Columns in R with `dplyr`
+
+```{r,eval=F}
+## Read in the HEART.csv dataset ##
+heart <- read.csv("HEART.csv")
+## Install the dplyr package if you haven't already ##
+install.packages('dplyr')
+## Load the dplyr package ##
+library(dplyr)
+## Select our specific columns ##
+selected_columns <- select(heart, 
+                           Chol_Status, 
+                           BP_Status, 
+                           Weight_Status, 
+                           Smoking_Status)
+```
+
+```{r,echo=F}
+## Read in the HEART.csv dataset ##
+heart <- read.csv("HEART.csv")
+## Install the dplyr package if you haven't already ##
+## Load the dplyr package ##
+library(dplyr)
+## Select our specific columns ##
+selected_columns <- select(heart, 
+                           Chol_Status, 
+                           BP_Status, 
+                           Weight_Status, 
+                           Smoking_Status)
+```
+
+## Selecting Columns in R with `dplyr`
+
+- As we can see in the code snippet above, we first read in the HEART.csv dataset using the `read.csv()` function.
+
+- Next, we load the `dplyr` package using the `library()` function.
+
+- Finally, we use the `select()` function to create a new dataframe called `selected_columns` from the existing `heart` dataframe that contains only the columns `Chol_Status`, `BP_Status`, `Weight_Status`, and `Smoking_Status`.
+
+## Filtering Rows in R with `dplyr`
+
+- Not only can we select columns, but we can also filter rows based on specific conditions.
+
+- For example, in the HEART dataset, we may want to filter out all rows where the `Chol_Status` is `High`.
+    - That is, we want to keep only the rows where `Chol_Status` is not `High`.
+    
+- To do this, we can use the `filter()` function from the `dplyr` package.
+
+## Filtering Rows in R with `dplyr`
+
+- The `filter()` function allows you to filter rows based on specific conditions.
+
+- The basic syntax is `filter(data, condition)`, where:
+    - `data` is the dataframe you are working with.
+    - `condition` is the condition you want to filter on.
+    
+- Let's try out our filtering operation on the HEART dataset.
+
+## Filtering Rows in R with `dplyr`
+
+```{r}
+## Filter out rows where Chol_Status is High ##
+filtered_rows <- filter(heart, 
+                        Chol_Status != "High")
+```
+
+## Filtering Rows in R with `dplyr`
+
+- Note, in the code snippet above, we use the `filter()` function to create a new dataframe called `filtered_rows` from the existing `heart` dataframe.
+
+- We specify the condition `Chol_Status != "High"` to filter out all rows where the `Chol_Status` is `High`.
+
+- We use the `!=` operator to indicate "not equal to".
+
+## Creating New Columns in R with `dplyr`
+
+- Many times, you may need to create new columns based on existing data in your dataset.
+
+- For example, in the HEART dataset, we may want to create a new column called `BMI` that calculates the Body Mass Index for each individual.
+
+- To do this, we can use the `mutate()` function from the `dplyr` package.
+
+## Creating New Columns in R with `dplyr`
+
+- The `mutate()` function allows you to create new columns based on existing columns in your dataframe.
+
+- The basic syntax is `mutate(data, new_column = expression)`, where:
+    - `data` is the dataframe you are working with.
+    - `new_column` is the name of the new column you want to create.
+    - `expression` is the calculation or transformation you want to apply to create the new column.
+
+- Let's create a new column called `BMI` in the HEART dataset.
+
+## Creating New Columns in R with `dplyr`
+
+\scriptsize
+```{r}
+## Add BMI Column to heart ##
+new_column <- mutate(heart, 
+                     BMI = (Weight / (Height)^2)*703)
+## Use str to verify ##
+str(new_column)
+```
+\normalsize
